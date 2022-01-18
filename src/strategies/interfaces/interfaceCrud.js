@@ -27,27 +27,6 @@ class ICrud {
     }
 }
 
-class MongoDB extends ICrud {
-    constructor() {
-        super()
-    }
-
-    create(item) {
-        console.log('Item foi salvo em MongoDB')
-    }
-}
-
-class Postgres extends ICrud {
-    constructor() {
-        super()
-    }
-
-    create(item) {
-        console.log('Item foi salvo em Postgres')
-    }
-}
-
-
 export {
     ICrud
 }
