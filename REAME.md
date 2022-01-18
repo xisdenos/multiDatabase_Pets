@@ -4,7 +4,7 @@ docker run \
     -e POSTGRES_USER=lucaspinto \
     -e POSTGRES_PASSWORD=1234 \
     -e POSTGRES_DB=pets \
-    -p 5555:5555 \
+    -p 5432:5432 \
     -d \
     postgres
 
