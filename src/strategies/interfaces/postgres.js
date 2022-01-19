@@ -1,4 +1,5 @@
 import { ICrud } from "./interfaceCrud.js"
+import { Sequelize } from 'sequelize'
 
 class PostgresDB extends ICrud {
     constructor() {
@@ -15,9 +16,10 @@ class PostgresDB extends ICrud {
             quoteIdentifiers: false,
             operatorAliases: false
         })
+        this.defineModel()
     }
 
-    defineModel() {
+    async defineModel() {
         this._pets = driver.define('pets', {
             id: {
                 type: Sequelize.INTEGER,
@@ -44,11 +46,11 @@ class PostgresDB extends ICrud {
 
     async isConnected() {
         try{
-
             await this._driver.authenticate()
+            console.log('os')
             return true
-        } catch(err) {
-
+        }
+         catch(error) {
             console.log('fail')
             return false
         }
@@ -59,6 +61,7 @@ class PostgresDB extends ICrud {
         console.log('Item foi salvo em Postgres')
     }
 }
+
 
 export {
     PostgresDB
