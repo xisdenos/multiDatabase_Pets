@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize'
+
 
 const driver = new Sequelize('pets', 'lucaspinto', '1234', {
     host: 'localhost',

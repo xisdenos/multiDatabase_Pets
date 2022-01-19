@@ -6,10 +6,9 @@ class PostgresDB extends ICrud {
         super()
         this._driver = null
         this._pets = null
-        this._connect()
     }
 
-    _connect() {
+    connect() {
         this._driver = new Sequelize('pets', 'lucaspinto', '1234', {
             host: 'localhost',
             dialect: 'postgres',
@@ -20,7 +19,7 @@ class PostgresDB extends ICrud {
     }
 
     async defineModel() {
-        this._pets = driver.define('pets', {
+        this._pets = this._driver.define('pets', {
             id: {
                 type: Sequelize.INTEGER,
                 required: true,
@@ -41,13 +40,12 @@ class PostgresDB extends ICrud {
             timestamps: false
         })
     
-        await Pets.sync()
+        await this._pets.sync()
     }
 
     async isConnected() {
         try{
             await this._driver.authenticate()
-            console.log('os')
             return true
         }
          catch(error) {
@@ -57,8 +55,9 @@ class PostgresDB extends ICrud {
     }
 
 
-    create(item) {
-        console.log('Item foi salvo em Postgres')
+    async create(item) {
+        const { dataValues } = await this._pets.create(item)
+        return dataValues
     }
 }
 
